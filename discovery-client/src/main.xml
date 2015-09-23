@@ -102,7 +102,7 @@
 	<container id="ServerContainer" width="110" height="110">
 		<container width="100" height="100" skin="new Skin( $.server.color )">
 			<text left="0" right="0" bottom="0" skin="maskSkin">
-				<block style="colorStyle" string="$.server.color"/>
+				<block style="colorStyle" string="$.server.ip"/>
 			</text>
 		</container>
 	</container>
@@ -123,9 +123,13 @@
 						if ( !servers || ( 0 == servers.length ) )
 							column.add( new NoServersLine );
 						else {
+							var server = {};
+							var addr = "";
 							for ( var i = 0; i < servers.length; ++i )
-								column.add( new ServerContainer( { server: servers[ i ] } ) );
-						}
+								server = servers[ i ];
+								addr = parseURI(server.url).authority // just IP and port
+								server.ip = addr.slice(0,addr.indexOf(":")); // strip port
+								column.add( new ServerContainer( { server: server } ) );						}
 					]]></method>	
 				</behavior>
 			</column>
