@@ -171,7 +171,7 @@
 	</container>
 
 	<container id="UnsupportedScreen" left="0" right="0" top="0" bottom="0" skin="blackSkin">
-		<text left="0" right="0" style="errorStyle" string="'This example is not currently supported on Windows.'"/>
+		<text left="0" right="0" style="errorStyle" string="'The Zeroconf extension is not currently supported on Linux or Android.'"/>
 	</container>
 
 	<handler path="/browse">
@@ -205,8 +205,8 @@
 				if (Files.exists(uri)) {
 	                message.status = 200;
 					message.setResponseHeader("Content-Type", "image/jpeg");
-					message.responseBuffer = Files.readBuffer(uri);
-	            	message.setResponseHeader("Content-Length", message.responseBuffer.byteLength);
+					message.responseChunk = Files.readChunk(uri);
+	            	message.setResponseHeader("Content-Length", message.responseChunk.length);
 	            }
 			}
 		]]></behavior>
@@ -248,7 +248,7 @@
 		};
 
 		var model = application.behavior = new ApplicationBehavior(application);
-		if ("win" != system.platform)
+		if ( ("linux" != system.platform) && ("android" != system.platform) )
 			application.add(new BrowserScreen(data));
 		else
 			application.add(new UnsupportedScreen);
