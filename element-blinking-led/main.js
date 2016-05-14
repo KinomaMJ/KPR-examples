@@ -18,7 +18,7 @@ var main = {
 			led: {
 		        require: "led",
 		        pins: {
-		            led: { pin: 9, type: "Digital" },
+		            led: { pin: 9, type: "Digital", direction: "output"},
 		            ground: {pin: 10, type: "Ground"},
 		        }
 			}    		
