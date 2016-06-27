@@ -248,10 +248,8 @@
 		};
 
 		var model = application.behavior = new ApplicationBehavior(application);
-		if ("win" != system.platform)
-			application.add(new BrowserScreen(data));
-		else
-			application.add(new UnsupportedScreen);
+		application.add(new BrowserScreen(data));
+		
 	]]></script>
 	
 	
